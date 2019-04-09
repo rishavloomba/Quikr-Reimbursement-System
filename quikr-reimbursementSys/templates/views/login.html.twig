@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="./assets/login.css">
+{% endblock %}
+
+{% block body %}
+
+<!-- Container -->
+<div class="container">
+   <div class="jumbotron"> 
+     <div class="form-design">
+        <img src="https://teja10.kuikr.com/public/images/dist/PNG/Quikr-Logo.png" alt="login"> 
+          
+          <form action="/login" method="POST">
+            <div class="form-group">
+                <input class="form-control" type="text" name="email" placeholder="xyz@gmial.com" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-success btn-block">Login!</button>
+            </div>
+          </form>
+          <!-- <p>  if you don't have account then register <a href="signin.html">here</a></p> -->
+        </div>
+    </div>
+</div> 
+
+{% endblock %}

@@ -1,0 +1,156 @@
+ {% extends 'base.html.twig' %}
+ 
+ {% block title %}Reimbursement{% endblock %}
+
+ {% block stylesheets %}
+  <link rel="stylesheet" href="/assets/reimbursement.css" >
+ {% endblock %}
+
+ {% block body %}
+
+ 
+
+  <!-- header -->
+ <header>
+    <!-- Navbar -->
+    {{ include('inc/navbar.html.twig') }}
+</header> 
+
+<!-- Section -->
+<section class="container">
+
+<div class="jumbotron">
+  <div class="page-header">
+       <h3>Add your tasks</h3>
+       <p class="well well-sm">Add your weekly tasks here. At end of apprisal cycle publisg the major tasks, so that your coworkers can give feedback about your performance. It will be easy to fillup your performance evaluation form this way.</p> 
+   </div>
+   <form class="publish-form" method="POST" action="/reimbursement/{{result[0].empid}}/addExpense">
+     <!-- Table -->
+    <table cellpadding="0" cellspacing="0" border="0" class="table display" id="example" width="100%">
+      <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Travle Expense</th>
+            <th>Telephone Expense</th>
+            <th>Bussiness Meal</th>
+            <th>Hotel Stay</th>
+            <th>Description</th>
+            <th>Total</th>
+            <th>Status</th>
+         </tr>
+      </thead>
+       <tbody>
+       {% if result %}
+         {% for res in result %}
+           <tr>
+               <td class="clearfix">
+                    <input type="checkbox" name="task" id="task-1" value="task-1">
+                    <a data-toggle="modal" data-target="#myModal" class="btn btn-link btn-xs">
+                      <i class="far fa-edit"></i> Edit
+                    </a>
+               </td>
+                <td> {{ res.empid }} </td>
+                <td> {{ res.travel_exp }} </td>
+                <td> {{ res.telephone_exp }} </td>
+                <td> {{ res.business_meal}} </td>
+                <td> {{ res.hotel_stay }}</td>
+                <td> {{ res.total_expense}}</td>
+                <td> {{ res.description }}</td>
+                <td> {{ res.status }}</td>
+              </tr>
+           {% endfor %}
+         {% else %}
+            <p> No data </p>
+         {% endif %}
+
+      </tbody>
+  </table>
+  <button id="publish" name="publish" class="btn btn-danger">Publish</button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Expense</button>
+  </form>  
+</div>
+
+<!-- Modal Form -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+  <!-- Modal content-->
+  <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Your Expense</h4>
+      </div>
+
+    <div class="modal-body">
+    
+    <!-- Add New Expense Form -->
+    <form class="form-horizontal" method="POST" action="/reimbursement/{{result[0].empid}}/addExpense">
+      <fieldset>
+  
+    <!-- Title -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="title">Title</label>  
+        <div class="col-md-5">
+        <input id="title" name="title" type="text" placeholder="enter title" class="form-control input-md" required="">
+       </div>
+      </div>
+
+    <!-- Travel Expense -->
+      <div class="form-group">
+         <label class="col-md-4 control-label" for="travel_exp">Travel Expense</label>
+         <div class="col-md-5">
+           <input id="travel_exp" name="travel_exp" class="form-control" placeholder="Enter Travel Expense" type="text">
+         </div>
+      </div>
+    <!-- Telephone -->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="telephone_exp">Telephone Expense</label>
+        <div class="col-md-5">
+          <input id="telephone_exp" name="telephone_exp" class="form-control" placeholder="Enter Telephone Expense" type="text">
+        </div>
+     </div>
+    <!-- Bussiness Meal -->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="business_meal">Bussiness Meal</label>
+        <div class="col-md-5">
+          <input id="business_meal" name="business_meal" class="form-control" placeholder="Enter Bussiness Meal expense" type="text">
+        </div>
+     </div>           
+    <!-- Hotel Stay -->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="hotel_stay">Hotel Stay</label>
+        <div class="col-md-5">
+          <input id="hotel_stay" name="hotel_stay" class="form-control" placeholder="Enter hotel expense" type="text">
+        </div>
+     </div>  
+    <!-- Description -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="description">Description</label>
+        <div class="col-md-5">                     
+          <textarea class="form-control" id="description" name="description">Description</textarea>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="submit"></label>
+        <div class="col-md-4">
+          <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+  
+    </fieldset>
+  </form>
+  </div>
+
+   <!-- Modal close Button -->  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+  
+
+</section>
+ {% endblock %}
