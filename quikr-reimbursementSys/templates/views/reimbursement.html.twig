@@ -21,7 +21,7 @@
 
 <div class="jumbotron">
   <div class="page-header">
-       <h3>Add your tasks</h3>
+       <h3>Add your Expenses</h3>
        <p class="well well-sm">Add your weekly tasks here. At end of apprisal cycle publisg the major tasks, so that your coworkers can give feedback about your performance. It will be easy to fillup your performance evaluation form this way.</p> 
    </div>
    <form class="publish-form" method="POST" action="/reimbursement/{{result[0].empid}}/addExpense">
@@ -55,8 +55,8 @@
                 <td> {{ res.telephone_exp }} </td>
                 <td> {{ res.business_meal}} </td>
                 <td> {{ res.hotel_stay }}</td>
-                <td> {{ res.total_expense}}</td>
                 <td> {{ res.description }}</td>
+                <td> {{ res.total_expense}}</td>
                 <td> {{ res.status }}</td>
               </tr>
            {% endfor %}
@@ -82,16 +82,16 @@
       </div>
 
     <div class="modal-body">
-    
+
     <!-- Add New Expense Form -->
-    <form class="form-horizontal" method="POST" action="/reimbursement/{{result[0].empid}}/addExpense">
+    <form class="form-horizontal" method="POST" action="/reimbursement/{{result[0].empid}}/addexpense">
       <fieldset>
   
     <!-- Title -->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="title">Title</label>  
+        <label class="col-md-4 control-label" for="title">emp id</label>  
         <div class="col-md-5">
-        <input id="title" name="title" type="text" placeholder="enter title" class="form-control input-md" required="">
+        <input id="title" name="empid" type="text" value="{{result[0].empid}}" class="form-control input-md" required>
        </div>
       </div>
 
@@ -111,7 +111,7 @@
      </div>
     <!-- Bussiness Meal -->
     <div class="form-group">
-        <label class="col-md-4 control-label" for="business_meal">Bussiness Meal</label>
+        <label class="col-md-4 control-label" for="business_meal">Business Meal</label>
         <div class="col-md-5">
           <input id="business_meal" name="business_meal" class="form-control" placeholder="Enter Bussiness Meal expense" type="text">
         </div>
@@ -127,7 +127,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="description">Description</label>
         <div class="col-md-5">                     
-          <textarea class="form-control" id="description" name="description">Description</textarea>
+          <textarea class="form-control" id="description" name="description"></textarea>
         </div>
       </div>
 
